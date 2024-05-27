@@ -30,8 +30,8 @@ public final class Constants {
 
     //Shooter
     public static int
-    TopShooterID = 4,
-    BottomShooterID = 5;
+    TopShooterID = 5,
+    BottomShooterID = 4;
 
     public static int
     TalonID = 5;

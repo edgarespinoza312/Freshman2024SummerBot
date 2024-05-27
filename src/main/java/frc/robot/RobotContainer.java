@@ -4,12 +4,19 @@
 
 package frc.robot;
 
+import frc.robot.commands.FlywheelCommand;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.subsystems.DriveBaseSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS5Controller;
+
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Flywheel;
 
 
 /**
@@ -19,6 +26,19 @@ import edu.wpi.first.wpilibj.Joystick;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+
+  private PS5Controller driver = new PS5Controller(0);
+  
+  private JoystickButton Intakefwd = new JoystickButton(driver, 5);
+  private JoystickButton Intakebwd = new JoystickButton(driver, 6);
+
+  private Intake IntakeSub = new Intake();
+
+  private JoystickButton Flywheelfwd = new JoystickButton(driver, 7);
+  private JoystickButton Flywheelbwd = new JoystickButton(driver, 8);
+
+  private Flywheel FlywheelSub = new Flywheel();
+
   // The robot's subsystems and commands are defined here...
   private final DriveBaseSubsystem driveSub = new DriveBaseSubsystem();
 
@@ -47,12 +67,19 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    Intakefwd.whileTrue(new IntakeCommand(.7 , IntakeSub));
+    Intakebwd.whileTrue(new IntakeCommand(-.7, IntakeSub));
+
+    Flywheelfwd.whileTrue(new FlywheelCommand(.8 , FlywheelSub));
+    Flywheelbwd.whileTrue(new FlywheelCommand(-.8, FlywheelSub));
+      
+    }
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
  
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-  }
+  
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

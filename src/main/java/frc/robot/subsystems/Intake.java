@@ -4,15 +4,17 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 
 
 public class Intake extends SubsystemBase {
-  final PWMVictorSPX Intake = new PWMVictorSPX(Constants.MotorsID.IntakeID);
-  /** Creates a new Intake. */
+  private VictorSP intake_Motor = new VictorSP(6);
   public Intake() {}
+
+  public void move(double speed){
+    intake_Motor.set(speed);
+  }
 
   @Override
   public void periodic() {
